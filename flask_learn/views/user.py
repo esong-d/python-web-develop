@@ -1,28 +1,12 @@
 # -*- encoding = utf-8 -*-
-from hashlib import md5
-
 from app import app
 from flask import request, jsonify, Blueprint
 
-from password_encrypt import md5_encrypt
+from flask_learn.utils.password_encrypt import md5_encrypt
 from model import db, User
 
+
 base_bp = Blueprint("api", __name__)
-
-
-@base_bp.route('/')
-def index():
-    return 'Hello World!'
-
-
-@base_bp.route('/login')
-def login():
-    return "login"
-
-
-@base_bp.route('/logout')
-def logout():
-    return "logout"
 
 
 @base_bp.route('/new_user', methods=['POST', 'GET'])
