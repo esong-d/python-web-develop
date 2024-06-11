@@ -5,10 +5,10 @@ from flask import Blueprint
 
 home_bp = Blueprint('home', __name__)
 
-
+@app.route('/')
 @home_bp.route('/', methods=['GET', 'POST'])
 def home():
-    return "hello world"
+    return "home page"
 
 
 app.register_blueprint(home_bp, url_prefix='/home')
