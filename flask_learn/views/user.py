@@ -2,7 +2,7 @@
 from app import app
 from flask import request, jsonify, Blueprint
 
-from flask_learn.utils.password_encrypt import md5_encrypt
+from utils.password_encrypt import md5_encrypt
 from model import db, User
 
 

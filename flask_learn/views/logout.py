@@ -3,7 +3,7 @@
 from app import app
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/logout', methods=['GET', 'POST'])
 def logout():
     return 'welcome to logout'
     # url_for('home')
