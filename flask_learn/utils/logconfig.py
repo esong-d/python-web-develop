@@ -2,8 +2,8 @@
 import os.path
 from logging.config import dictConfig
 
-if not os.path.exists('logs'):
-    os.mkdir('logs')
+if not os.path.exists('../logs'):
+    os.mkdir('../logs')
 
 dictConfig({
     'version': 1,

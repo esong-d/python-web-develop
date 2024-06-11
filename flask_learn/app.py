@@ -4,11 +4,12 @@ from flask import Flask
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
-from view import *
+from views.home import *
+from views.login import *
+from views.logout import *
+from views.product import *
+from views.user import *
 from model import *
-
-with app.app_context():
-    db.create_all()
 
 
 if __name__ == '__main__':

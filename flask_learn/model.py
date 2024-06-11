@@ -32,3 +32,7 @@ class Article(db.Model):
 
     def __repr__(self):
         return '<Article %r>' % self.title
+
+
+with app.app_context():
+    db.create_all()
