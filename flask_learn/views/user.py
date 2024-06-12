@@ -11,8 +11,6 @@ base_bp = Blueprint("api", __name__)
 
 @base_bp.route('/new_user', methods=['POST', 'GET'])
 def new_user():
-    cookie = request.cookies
-    print("cookie: ", cookie)
     if request.method == 'POST':
         name = request.form.get('name')
         pwd = request.form.get('pwd')
