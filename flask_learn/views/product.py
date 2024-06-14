@@ -35,20 +35,23 @@ def add():
 
 
 
-@product_bp.route('/query', methods=['POST'])
+@product_bp.route('/query', methods=['POST', 'GET'])
 def query():
+    if request.method == 'GET':
+        pageNum = request.args.get('pageNum')
+        pageSize = request.args.get('pageSize')
     if request.method == 'POST':
-        pageNum = request.form.get('pageNum')
-        pageSize = request.form.get('pageSize')
+        pageNum = request.get_json().get('pageNum')
+        pageSize = request.get_json().get('pageSize')
     if not pageNum or not pageSize:
         return jsonify({"code": 500, "data": "null", "msg": "参数错误，查询失败"})
-    if redis.get(key=str(pageNum)):
-        return jsonify({"code": 500, "data": redis.get(str(pageNum)), "msg": "查询成功"})
+    # if redis.get(key=str(pageNum)):
+    #     return jsonify({"code": 500, "data": redis.get(str(pageNum)), "msg": "查询成功"})
     try:
         data = db.session.query(Product).order_by(Product.id).paginate(page=int(pageNum), per_page=int(pageSize))
         data = datetime_format([i.to_json() for i in data.items])
         # 存储到redis
-        redis.set(str(pageNum), str(data))
+        # redis.set(str(pageNum), data)
         return jsonify({"code": 200, "data": data, "msg": "查询成功"})
     except Exception as e:
         print(e)
