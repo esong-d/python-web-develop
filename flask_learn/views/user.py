@@ -6,10 +6,10 @@ from utils.password_encrypt import md5_encrypt
 from model import db, User
 
 
-base_bp = Blueprint("api", __name__)
+base_bp = Blueprint("user", __name__)
 
 
-@base_bp.route('/new_user', methods=['POST', 'GET'])
+@base_bp.route('/new', methods=['POST', 'GET'])
 def new_user():
     if request.method == 'POST':
         name = request.form.get('name')
@@ -33,11 +33,11 @@ def new_user():
         return jsonify({'code': 200, 'msg': '请求成功', 'text': '请输入用户名和密码'})
 
 
-@base_bp.route('/query_user', methods=['POST', 'GET'])
-def query_user():
+@base_bp.route('/query', methods=['POST', 'GET'])
+def query():
     if request.method == 'POST':
-        page = int(request.form.get('page'))
-        pages_size = int(request.form.get('page_size'))
+        page = int(request.get_json().get('pageNum'))
+        pages_size = int(request.get_json().get('pageSize'))
         query = db.session.query(User)
         if query.count() > 0:
             data = query.order_by(User.username.desc()).paginate(page=page, per_page=pages_size)
@@ -72,7 +72,7 @@ def change_user():
     return jsonify({"msg": "change_user success", "code": 200})
 
 
-@base_bp.route('/delete_user', methods=['GET'])
+@base_bp.route('/delete', methods=['GET'])
 def delete_user():
     name = request.args.get('name')
     if not name:
@@ -93,4 +93,4 @@ def delete_user():
     return jsonify({"msg": "delete_user success", "code": 201, "text": name + " 删除成功"})
 
 
-app.register_blueprint(base_bp, url_prefix="/api")
+app.register_blueprint(base_bp, url_prefix="/user")
