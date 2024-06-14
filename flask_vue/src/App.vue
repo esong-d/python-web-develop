@@ -1,18 +1,15 @@
 <template>
-  <HelloWorld msg="Welcome to hello"/>
-  <router-view></router-view>
+  <router-view/>
 </template>
 
 <script>
-  import HelloWorld from './components/HelloWorld.vue'
-
   export default {
     name: 'App',
     components: {
-      HelloWorld
+
     }
   }
 </script>
 
-<style>
+<style scoped>
 </style>
