@@ -4,12 +4,12 @@ const LoginView = () => import('../views/LoginView.vue')
 
 const routes = [
     {
-        path: '/home',
-        RouterView: HomeView
+        path: '/',
+        component: HomeView
     },
     {
         path: '/login',
-        RouterView: LoginView
+        component: LoginView
     },
 
 ]

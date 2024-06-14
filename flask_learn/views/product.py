@@ -1,5 +1,5 @@
 # -*- encoding = utf-8 -*-
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, g
 import json
 
 from app import app
