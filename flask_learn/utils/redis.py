@@ -5,19 +5,24 @@ class Redis():
     def __init__(self) -> None:
         self.redis_client = FlaskRedis()
         self.redis_client.init_app(app)
-        self.redis_pipeline = self.redis_client.pipeline()
     
     def set(self, key, value):
-        self.redis_pipeline.set(key, value)
+        self.redis_client.set(key, value)
+    
+    def lpush(self, key, value):
+        self.redis_client.lpush(key, value)
+
+    def lrange(self, key, start, end):
+        return self.redis_client.lrange(key, start, end)
     
     def get(self, key):
-        value = self.redis_pipeline.get(key)
+        value = self.redis_client.get(key)
         if value:
             return value.decode()
         else:
             return None
     
     def delete(self, key):
-        return self.redis_pipeline.delete(key)
+        return self.redis_client.delete(key)
 
 redis = Redis()
