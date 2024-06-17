@@ -45,8 +45,8 @@ def query():
         pageSize = request.get_json().get('pageSize')
     if not pageNum or not pageSize:
         return jsonify({"code": 500, "data": "null", "msg": "参数错误，查询失败"})
-    # if redis.get(key=str(pageNum)):
-    #     return jsonify({"code": 500, "data": redis.get(str(pageNum)), "msg": "查询成功"})
+    if redis.get(key=str(pageNum)):
+        return jsonify({"code": 500, "data": json.loads(redis.get(str(pageNum))), "msg": "查询成功"})
     try:
         data = db.session.query(Product).order_by(Product.id).paginate(page=int(pageNum), per_page=int(pageSize))
         data = datetime_format([i.to_json() for i in data.items])
