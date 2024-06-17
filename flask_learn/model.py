@@ -30,20 +30,6 @@ class User(db.Model):
         })
 
 
-class Article(db.Model):
-    _tablename_ = 'article'
-    id = db.Column(db.Integer, primary_key=True, index=True)
-    title = db.Column(db.String(80), unique=False, nullable=False)
-    content = db.Column(db.Text)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __repr__(self):
-        return str({
-            "id": self.id,
-            "user_id": self.user_id,
-            "title": self.title
-        })
-
 class Product(db.Model):
 
     __tablename__ = 'product'

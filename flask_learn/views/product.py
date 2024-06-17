@@ -1,5 +1,5 @@
 # -*- encoding = utf-8 -*-
-from flask import Blueprint, request, jsonify, g
+from flask import Blueprint, request, jsonify
 import json
 
 from app import app
@@ -51,7 +51,7 @@ def query():
         data = db.session.query(Product).order_by(Product.id).paginate(page=int(pageNum), per_page=int(pageSize))
         data = datetime_format([i.to_json() for i in data.items])
         # 存储到redis
-        # redis.set(str(pageNum), data)
+        redis.set(key=str(pageNum), value=json.dumps(data))
         return jsonify({"code": 200, "data": data, "msg": "查询成功"})
     except Exception as e:
         print(e)

@@ -13,9 +13,9 @@ base_bp = Blueprint("user", __name__)
 def new_user():
     if request.method == 'POST':
         name = request.form.get('name')
-        pwd = request.form.get('pwd')
+        pwd = request.form.get('password')
         email = request.form.get('email')
-        # print(name, pwd, email)
+        print(name, pwd, email)
         query = db.session.query(User).filter(User.username == name).first()
         # print("查询结果", query)
         if query:
