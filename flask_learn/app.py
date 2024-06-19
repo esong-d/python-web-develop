@@ -7,7 +7,6 @@ app = Flask(__name__)
 CORS(app)
 app.config.from_pyfile('config.py')
 
-from views.home import *
 from views.register import *
 from views.login import *
 from views.logout import *
