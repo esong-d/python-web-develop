@@ -22,4 +22,3 @@ if __name__ == '__main__':
     # 生产环境启动程序(多线程)
     server = pywsgi.WSGIServer(('127.0.0.1', 9090), app)
     server.serve_forever()
-    app.run(host='127.0.0.1', port=9090)
